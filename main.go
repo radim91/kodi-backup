@@ -22,8 +22,8 @@ func init() {
 	err := godotenv.Load(".env")
 	if err != nil {
 		os.Setenv("IP_ADDR", "")
-        os.Setenv("SFTP_USER", "")
-        os.Setenv("SFTP_PASS", "")
+		os.Setenv("SFTP_USER", "")
+		os.Setenv("SFTP_PASS", "")
 	}
 }
 
@@ -53,7 +53,7 @@ func main() {
 	os.MkdirAll(downloadDir, 0777)
 
 	/* dirBar := progressbar.Default() */
-    fmt.Println("Creating dirs. Please wait...")
+	fmt.Println("Creating dirs. Please wait...")
 	loopDirs(rootDir, client)
 
 	if err != nil {
@@ -85,7 +85,7 @@ func downloadFile(client *sftp.Client, remoteFile string, destFile string) error
 
 	defer dstFile.Close()
 
-    _, err = io.Copy(dstFile, srcFile)
+	_, err = io.Copy(dstFile, srcFile)
 	if err != nil {
 		return err
 	}
@@ -134,7 +134,7 @@ func loopDirs(path string, client *sftp.Client) error {
 			_, err := os.Stat(downloadDir + path[5:] + "/" + file.Name())
 
 			if os.IsNotExist(err) {
-				err := os.MkdirAll(downloadDir + path[5:] + "/" + file.Name(), 0777)
+				err := os.MkdirAll(downloadDir+path[5:]+"/"+file.Name(), 0777)
 
 				if err != nil {
 					fmt.Println(err)
